@@ -1,0 +1,41 @@
+.title_landing{
+    text-indent: 35%;
+    font-size: xx-large;
+    text-shadow: 0 0 30px rgb(168, 54, 77), 0 0 30px rgb(172, 69, 98), 0 0 50px rgba(189, 48, 88, 0.005), 0 0 50px rgb(245, 207, 207), 0 0 50px rgb(236, 170, 170), 0 0 50px rgb(17, 3, 3);
+    word-spacing: 4px;
+    width: 68rem;
+    margin-top: 6rem;
+    padding-left: 3rem;
+    color: white;
+
+    
+}
+
+
+
+
+
+.button {
+    font-family: "cursive";
+    position: relative;
+    display: inline-block;
+    margin: 10%;
+    padding: 15px 30px;
+    background-color: #e71b7d;
+    color:white;
+    letter-spacing: 8px;
+    font-size: 25px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: 1s;
+    border: none;
+    border-radius: 10px; 
+}
+
+
+.button:hover{
+    cursor:pointer ;
+    background: #0b0a0a;
+    box-shadow: 0 0 10px #c15782, 0 0 40px
+    #d2498b, 0 0 80px #d2498b;
+}

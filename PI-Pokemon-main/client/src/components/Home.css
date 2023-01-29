@@ -1,0 +1,11 @@
+div select {
+    margin-left: 50px;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 10px;
+    border: none !important;
+    background-color: rgb(242, 254, 9);
+    color: #e40758;
+    outline: none;
+ 
+}
