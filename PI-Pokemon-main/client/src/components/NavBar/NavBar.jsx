@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import logo_poke from "../img/logo_poke.png";
 
-export default function NavBar() {
+
+const NavBar = ()=> {
   return (
       <header id="navegador" className="header">
         <Link to="/">
-          <img  className="logo" src="https://i.imgur.com/avg4dfp.png" alt="404" />
+          <img  className="logo" src={logo_poke} alt="404" />
         </Link>
         <div> <Link to="/create" className="created" >
               Crear Pokemon
@@ -16,3 +18,5 @@ export default function NavBar() {
 
   );
 }
+
+export default NavBar;

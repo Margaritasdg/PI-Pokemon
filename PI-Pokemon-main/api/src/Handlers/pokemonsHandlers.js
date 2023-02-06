@@ -29,7 +29,7 @@ const getPokemonHandlers = async (req, res, next) => { //Busqueda por id
         const {id} = req.params;
         const pokemonsTotal = await getAllPokemons();
       if (id) { //Si me pasan un ID, filtro el que coincida con ese mismo, sino devuelvo texto.
-        let pokemonId = pokemonsTotal.filter((el) => el.id == id); 
+        const pokemonId = pokemonsTotal.filter((el) => el.id == id); 
         pokemonId.length
             ? res.status(200).json(pokemonId)
             : res.status(404).send("No se encontró el pokemon");
@@ -38,7 +38,7 @@ const getPokemonHandlers = async (req, res, next) => { //Busqueda por id
         next(error);
     }
     };
-const createPokemonsHandlers = async(req,res)=>{
+const createPokemonsHandlers = async(req,res,next)=>{
 try {
     const { name, image, life, attack, defense, speed, height, weight, types} = req.body //Datos que necesito pedir
     const newPokemon = await Pokemon.create({
@@ -50,6 +50,7 @@ try {
         speed,
         height,
         weight,
+       
         
     });
     
@@ -63,18 +64,36 @@ try {
         )
        await newPokemon.setTypes(dbTypes) //Una vez que se resuelva la promesa del Pokemon.create, le agrego los tipos
     
-        return res.status(201).json("Pokemon creado exitosamente");
+        return res.status(201).send("Pokemon creado exitosamente");
         }
 
 } catch (error) {
     
 }
-res.status(400).json("Error en data");
+res.status(400).json("No se creo ");
 
 };
+
+/*const putPokemonsHandlers = async (req, res, next) =>{
+    
+try {
+    const {id,name}= req.body;
+    const updatedPokemon=await getAllPokemons();
+
+    if(!id || !name)throw Error("Error en data");
+    const pokemonUser = updatedPokemon.find((pokemonUser)=> pokemonUser.id == id);
+    if(!pokemonUser) throwError("No existe");
+    pokemonUser.name = name;
+    return res.status(200).json("modificado con exito")
+} catch (error) {
+
+}
+res.status(400).json("Error en data");
+};*/
 
 module.exports={
     getPokemonsHandlers,
     getPokemonHandlers,
     createPokemonsHandlers,
+    //putPokemonsHandlers ,
 };

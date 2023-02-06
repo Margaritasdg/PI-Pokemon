@@ -1,14 +1,14 @@
 import React from 'react';
 import{ Link} from "react-router-dom";
-import './LandingPage.css'
+import './Landing.css'
 
 
 
 
-export default function LandingPage(){
+const Landing=()=>{
     return(
     <div className="lp">
-       <img src="fondo"  alt=""   />
+       <img  src= "fondo"  alt=""   />
             <h3 className='title_landing'>Encuentra tu Pokemon!!</h3>
         <div>
             </div>
@@ -20,4 +20,4 @@ export default function LandingPage(){
 )
 
 }
-    
+export default Landing;

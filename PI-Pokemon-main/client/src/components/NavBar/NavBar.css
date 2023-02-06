@@ -1,8 +1,10 @@
 .logo {
-    width:140px;
+    width:150px;
     float: left;
-    margin-left: 10px;
-    /* margin-bottom: 30px; */
+    margin-top: 15px;
+    margin-right: 20px;
+    /*margin-left: 1em;
+     margin-bottom: 30px;*/
     transform: translate(0px,-18px)
   }
   

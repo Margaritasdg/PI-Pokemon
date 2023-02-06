@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,35 +8,34 @@ import {
   filterCreated,
   Sort,
   filterByAttack,
-} from "../actions/index.js";
+} from "../../redux/actions";
 import { Link } from "react-router-dom";
-import CardPokemon from "./Card";
-import Paginado from "./Paginado";
-import NavBar from "./NavBar";
-import SearchBar from "./SearchBar";
+import CardsContainer from "../../components/CardsContainer/CardsContainer";
+import Paginado from "../../components/Paginado/Paginado";
+import NavBar from "../../components/NavBar/NavBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Home.css";
 
-function Home() {
-  const dispatch = useDispatch();
-  const allPokemons = useSelector((state) => state.pokemons) //
-  
-  
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pokemonsPerPage] = useState(12);
-  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+
+const Home= ()=> {
+  const dispatch = useDispatch();//me trae el reduce ,el estado pokemons
+  const allPokemons = useSelector((state) => state.pokemons) //con useSelector hago que me traiga todo lo q esta en el estado de pokemon y lo guardo en esta constante
+  const [currentPage, setCurrentPage] = useState(1);//estado local.siempre arranca de la pag. 1//guardame la pag. actual y una constante que me setee la pag.actual
+  const [pokemonsPerPage] = useState(12);//otro estado local, setear los pokemons por pag. //guardar cuantos quiero por pagina
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;//1*12
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
-  const currentPokemons = allPokemons.slice(
+  const currentPokemons = allPokemons.slice(//pokemon por pag. actual
     indexOfFirstPokemon,
     indexOfLastPokemon
   );
 
-  const paginado = (pageNumber) => {
+  const paginado = (pageNumber) => {   // me va  ayudar al renderizado
     setCurrentPage(pageNumber);
   };
-
-  useEffect(() => {
+    //me traigo los pokemons cuando el componente se monta
+  useEffect(() => {  // paso la accion q arriba declare 
     dispatch(getPokemons());
-  }, [dispatch]);
+  }, [dispatch]);  //arreglo vacio porque no depende de nada , se monta tranquilo
 
   function handleFilterType(e) {
     dispatch(filterPokemonsByType(e.target.value));
@@ -49,12 +49,12 @@ function Home() {
     dispatch(filterByAttack(e.target.value));
   }
 
-  function onSelectsChange(e) {
+  function onSelectsChange(e) {  
     dispatch(Sort(e.target.value));
   }
-
+  
   return (
-    <>
+     <>
       <NavBar />
       <SearchBar className="search"/>
       <div className="home">
@@ -64,9 +64,7 @@ function Home() {
             <option value="ASCENDENTE">Ascendente</option>
             <option value="DESCENDENTE">Descendente</option>
           </select>
-          <select
-            name="selects"
-            onChange={handleFilterAttack}
+          <select name="selects" onChange={handleFilterAttack}
             className="attack"
           >
             <option value="Fuerza"> Fuerza </option>
@@ -74,7 +72,7 @@ function Home() {
             <option value="Menor fuerza">Menor fuerza</option>
           </select>
           <select onChange={handleFilterType}>
-            <option value="type"> Tipo </option>
+          <option value="type"> Tipo </option>
             <option value="normal"> Normal </option>
             <option value="flying"> Flying </option>
             <option value="poison"> Poison </option>
@@ -98,22 +96,25 @@ function Home() {
           />
           {currentPokemons?.map((e) => {
               return (
-                <fragment>
-                  <Link to={"/home/" + e.id}>
-                    <CardPokemon
+                <>
+                  <Link to={"/home/" + e.id}> 
+                    <CardsContainer 
                       name={e.name}
                       image={e.image}
                       types={e.types}
+                      key={e.id}
                     />
                   </Link>
-                </fragment>
+                </>
               );
-            })} 
+            })}
+            
+          </div>
         </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
 
 export default Home;
 
+//<CardsContainer curren={currentPokemons}/>

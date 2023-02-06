@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchPoke } from "../actions/index";
+import { searchPoke } from "../../redux/actions";
 import "./SearchBar.css";
 
-export default function SearchBar() {
+const SearchBar=()=> {
   const dispatch = useDispatch();
   const [name, setName] = useState("")
 
@@ -37,3 +37,5 @@ export default function SearchBar() {
     </div>
   );
 }
+
+export default SearchBar;

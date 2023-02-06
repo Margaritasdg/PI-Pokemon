@@ -2,26 +2,30 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetail } from "../actions/index.js";
+import { getDetail } from "../../redux/actions";
 import { Link , useParams} from "react-router-dom";
 import './Detail.css'
 
-export default function Detail() {
-  const dispatch = useDispatch();
-  const {id}= useParams();
+
+
+const Detail = ()=> {
+const dispatch = useDispatch();
+const {id}= useParams();
 
   useEffect(() => {
     dispatch(getDetail(id));
   }, [id,dispatch]);
 
   const  details = useSelector((state) => state.detail);
-      //console.log(details)
+     // console.log(details)
 
-
+     //function handleReset() {
+     // dispatch(getDetail());
+ // }
   return (
     <div className="container">
       <div className="volver">
-      <Link to="/home" className="letter"> Volver </Link> </div>
+      <Link to="/home" className="letter" >Volver</Link> </div>
       <div>
         {details.length ? (
           details.map((p) => (
@@ -31,7 +35,7 @@ export default function Detail() {
                 <h2 className="id">#{p.id}</h2>
               </div>
               <div>
-                <img  className="imagen" src={p.background_image? p.background_image: p.image } alt='not found' />
+                <img  className="imagen" src={p.image}  alt='' width="350px" height="300px"  />
                 {p.types.length === 2 ? (
                   <div>
                     <h3 className="type1">
@@ -63,6 +67,7 @@ export default function Detail() {
                       Velocidad: {p.speed} % -
                       Altura: {p.height} Mt -
                       Peso: {p.weight} Kg
+                      
                     </li>
                   </ul>
                   </h4>
@@ -72,8 +77,8 @@ export default function Detail() {
           ))
         ) : (
           <img
-            src={"https://thumbs.gfycat.com/IncredibleAshamedFreshwatereel-size_restricted.gif"}
-            width="450px" height="400px"
+            src={"https://img1.picmix.com/output/stamp/normal/0/9/0/4/1604090_a14a5.gif"}
+            width="300px" height="300px"
             alt="Not found"
           />
         )}
@@ -81,4 +86,4 @@ export default function Detail() {
     </div>
   );
 }
-//{p.image} alt="" width="300px" height="300px"
+export default Detail;

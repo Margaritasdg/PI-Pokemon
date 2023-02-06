@@ -1,4 +1,5 @@
 .stylesCard {
+  background-repeat: no-repeat;
     background: rgba(252, 7, 117, 0.87);
     margin: 35px;
     width: 20rem;
@@ -6,7 +7,7 @@
     display: inline-block;
     transition: all 400ms ease;
     box-sizing: content-box;
-    min-height: 200px;
+    min-height: 150px;
     border-color: #e7ef05da;
     border-width: 3.5px;
     border-style: solid;
@@ -24,13 +25,13 @@
     text-decoration: none;
   }
   
-  .typeStyle {
+  .typeStyle  {
     list-style-type: none;
     color: #e8095e;
     text-decoration-line: none;
     display: inline;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
     font-family:  cursive;
     text-decoration: none;
   }

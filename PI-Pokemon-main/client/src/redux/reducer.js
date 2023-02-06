@@ -1,3 +1,6 @@
+
+import{GET_POKEMONS,FILTER_BY_TYPE, FILTER_CREATED,FILTER_BY_ATTACK,SORT, SEARCH_NAME,GET_DETAILS,GET_TYPE} from "./actions";
+
 const initialState = {
   pokemons: [],
   allPokemons: [],
@@ -5,15 +8,15 @@ const initialState = {
   types: [],
 };
 
-function rootReducer(state = initialState, action) {
+const rootReducer = (state = initialState, action)=> {
   switch (action.type) {
-    case "GET_POKEMONS":
+    case GET_POKEMONS:
       return {
         ...state,
         pokemons: action.payload,
         allPokemons: action.payload,
       };
-    case "FILTER_BY_TYPE":
+    case FILTER_BY_TYPE:
       const allPokemons = state.allPokemons;
       const typeFiltered =
         action.payload === "type"
@@ -23,7 +26,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         pokemons: typeFiltered,
       };
-    case "FILTER_CREATED":
+    case FILTER_CREATED:
       const createdFilter =
         action.payload === "Creados"
           ? state.allPokemons.filter((e) => e.id.length > 2)
@@ -33,7 +36,7 @@ function rootReducer(state = initialState, action) {
         pokemons:
           action.payload === "Todos" ? state.allPokemons : createdFilter,
       };
-      case "FILTER_BY_ATTACK":
+      case FILTER_BY_ATTACK:
         let attackFilter = [...state.pokemons];
         attackFilter = attackFilter.sort((a, b) => {
           if (a.attack < b.attack) {
@@ -53,7 +56,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-    case "SORT":
+    case SORT:
       let orderedCharacters = [...state.pokemons];
       orderedCharacters = orderedCharacters.sort((a, b) => {
         if (a.name < b.name) {
@@ -70,18 +73,18 @@ function rootReducer(state = initialState, action) {
         pokemons:
           action.payload === "Filtro" ? state.allPokemons : orderedCharacters
       };
-    case "SEARCH_NAME":
+    case SEARCH_NAME:
       return {
         ...state,
         pokemons: action.payload 
       };
-    case "GET_DETAILS":
+    case GET_DETAILS:
       return {
         ...state,
         detail: action.payload,
       };
 
-    case "GET_TYPE":
+    case GET_TYPE:
       return {
         ...state,
         types: action.payload,

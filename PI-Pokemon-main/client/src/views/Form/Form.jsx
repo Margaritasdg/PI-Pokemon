@@ -2,28 +2,27 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {useHistory} from "react-router-dom"
-import { getType, postPokemon } from "../actions/index.js";
+import { getType, postPokemon } from "../../redux/actions";
 import { Link } from "react-router-dom";
-import "./PokemonCreate.css";
+import "./Form.css";
 
-function validate(pokemon){
-  let errors = {};
-  if (!pokemon.name){
+const  validate = (pokemon)=>{
+  const errors = {};
+  if (!pokemon.name.trim){
     errors.name = "Se requiere un Nombre"
   } return errors
 }
 
-export default function PokemonCreate() {
+  const Form=()=> {
   const dispatch = useDispatch();
   const history = useHistory();
   const types = useSelector((state) => state.types);
-
   const [errors,setErrors] = useState({});
 
   const [pokemon, setPokemon] = useState({
     name: "",
-    types: [],
     image: "",
+    types: [],
     life: 0,
     attack: 0,
     defense: 0,
@@ -36,30 +35,32 @@ export default function PokemonCreate() {
     dispatch(getType());
   }, [dispatch]);
 
-  function handleSelect(e) {
-    setPokemon({
-      ...pokemon,
-      type: [...pokemon.type, e.target.value],
-    });
-  }
+  
 
 
-function onInputChange(e) {
+const onInputChange = (e) =>{
   e.preventDefault();
   setPokemon({
     ...pokemon,
-    [e.target.name]: e.target.value,
-  });
-  setErrors(
-    validate({
+    [e.target.name]: e.target.value//name se refiere a cada dato por llenar,por eso en el form aparece name en todos
+                                //el value son los inputs de arriba que va a ir cambiando.
+  })
+  setErrors(validate({
       ...pokemon,
       [e.target.name]: e.target.value,
-    })
-  );
+    }));
+    //console.log(pokemon)
 }
 
+const handleSelect = (e) => {
+  setPokemon({
+    ...pokemon,
+    types: [...pokemon.types, e.target.value],
+  })
+};
 
-function onSubmit(e) {
+
+const onSubmit = (e) =>{
   e.preventDefault();
   setErrors(
     validate({
@@ -72,14 +73,15 @@ function onSubmit(e) {
     alert("Pokemon Creado 👌");
     setPokemon({//seteo todo mi input en cero
       name: "",
-      types: [],
       image: "",
+      types: [],
       life: 0,
       attack: 0,
       defense: 0,
       speed: 0,
       height: 0,
       weight: 0,
+      
   });
 }else{
   alert('ERROR: Pokemon No Creado  😕');
@@ -92,20 +94,18 @@ function onSubmit(e) {
     <form className="form" onSubmit={onSubmit}>
       <h3 className="title"> ¡Crea tu pokemon!</h3>
       
-        <label for="name"> Nombre: </label>
-        <input
+        <label htmlFor="name"> Nombre: </label>
+        <input className="input"
           onChange={onInputChange}
           id="name"
           name="name"
           type="text"
-          value={pokemon.name}
-          required
-          className="input"
+          value={pokemon.name}required
         />
         {errors.name && <p className="error"> {errors.name}</p>}
       
       
-        <label for="">Imagen: </label>
+        <label htmlFor="">Imagen:</label>
         <input
           onChange={onInputChange}
           name="image"
@@ -116,7 +116,7 @@ function onSubmit(e) {
       
       
        
-        <label for="">Vida: </label>
+        <label htmlFor="">Vida: </label>
         <input
           onChange={onInputChange}
           name="life"
@@ -126,7 +126,7 @@ function onSubmit(e) {
         />
     
      
-        <label for="">Fuerza: </label>
+        <label htmlFor="">Fuerza: </label>
         <input
           onChange={onInputChange}
           name="attack"
@@ -136,7 +136,7 @@ function onSubmit(e) {
         />
      
      
-        <label for="">Defensa: </label>
+        <label htmlFor="">Defensa: </label>
         <input
           onChange={onInputChange}
           name="defense"
@@ -146,7 +146,7 @@ function onSubmit(e) {
         />
      
      
-        <label for="">Velocidad: </label>
+        <label htmlFor="">Velocidad: </label>
         <input
           onChange={onInputChange}
           name="speed"
@@ -157,7 +157,7 @@ function onSubmit(e) {
       
      
         
-        <label for="">Altura: </label>
+        <label htmlFor="">Altura: </label>
         <input
           onChange={onInputChange}
           name="height"
@@ -167,7 +167,7 @@ function onSubmit(e) {
         />
      
      
-        <label for="">Peso: </label>
+        <label htmlFor="">Peso: </label>
         <input
           onChange={onInputChange}
           name="weight"
@@ -178,21 +178,23 @@ function onSubmit(e) {
       
       
         
-        <p className="types-s">
-        <select onChange={handleSelect}>
-          {types.map((e) => (
-            <option  value={e.name}>{e.name}</option>
+        <div className="types-s">
+          <label className="types">Tipos:</label>
+          <select onChange={handleSelect}>
+            {types.map((e) => (
+              <option key={e.name} value={e.name}>{e.name}</option>
           ))}
+          </select>
+        </div>
 
-        </select>
-        <ul>
-          <li>{pokemon.types.map((e) => e + " , ")}</li>
-        </ul>
-        </p>
-        <Link to="/home">
-      <button type="submit" className="atras">Atrás</button></Link>
+        <div>
+          <Link to="/home">
+            <button type="submit" className="atras">Atrás</button></Link>
       <button type="submit" className="bottom">Crear</button>
+
+        </div>
     </form>
   );
 }
 
+export default Form;
