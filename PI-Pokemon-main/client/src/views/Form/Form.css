@@ -42,7 +42,7 @@ label {
 
 
 .bottom{
-	background-color: rgb(245, 221, 10);
+	background-color: rgba(6, 6, 5, 0.959);
 	border-radius: 5px;
 	padding: 8px;
 	color: rgb(247, 5, 114) ;
@@ -52,16 +52,28 @@ label {
 	cursor:pointer
 }
 
-.atras{
-	background-color: rgb(245, 221, 10);
-	border-radius: 5px;
-	color: rgb(247, 5, 114) ;
-	margin-right: 20px;
-	cursor:pointer;
-	padding: 8px;
+.atras {
+  background-color: black;
+  border-radius: 5px;
+  color: rgb(247, 5, 114);
+  margin-right: 20px;
+  cursor: pointer;
+  padding: 8px;
 }
 
 select option[selected] {
   background-color: #d1026d;
   color: white;
+}
+select option:hover {
+  background-color: yellow;
+}
+.bottom:hover {
+  background-color:  rgb(247, 5, 114);
+  color: black;
+}
+
+.atras:hover {
+  background-color: rgb(247, 5, 114);
+  color: black;
 }

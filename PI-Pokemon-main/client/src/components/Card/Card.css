@@ -2,25 +2,26 @@
   background-repeat: no-repeat;
     background: rgba(252, 7, 117, 0.87);
     margin: 35px;
-    width: 20rem;
-    border-radius: 15px;
+    width: 15rem;
+    border-radius: 8px;
     display: inline-block;
     transition: all 400ms ease;
     box-sizing: content-box;
     min-height: 150px;
     border-color: #e7ef05da;
-    border-width: 3.5px;
+    border-width: 2.5px;
     border-style: solid;
-  }
+    box-shadow: 0px 0px 20px 10px rgba(252, 7, 117, 0.87);
+}
   
   .stylesCard:hover {
     box-shadow: 20px 20px 20px rgb(0, 0, 0, 0, 4);
-    transform: translateY(-3%);
+    transform: translateY(-5%);
   }
   
   .name {
     font-family:  cursive;
-    font-size: 35px;
+    font-size: 28px;
     color: #f9eeee;
     text-decoration: none;
   }
@@ -42,4 +43,15 @@
     text-align: center;
     align-content: center;
     color: rgb(238, 240, 233);
+  }
+  .name:hover {
+    color: #170c0c;
+  }
+  ul li:hover {
+    color: #170c0c;
+  }
+  .img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
   }

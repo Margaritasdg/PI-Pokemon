@@ -22,7 +22,7 @@ const Card = ({ name, types, image }) => {
   return (
     <div className="stylesCard">
       <h3 className="name">{capitalizeFirstLetter(name)}</h3>
-      <img src={image} alt="imagen" className="img" width="120px" height="120px" />
+      <img src={image} alt="imagen" className="img" width="200px" height="200px" />
       <ul className="typeStyle">
         <li className="type">{typeList}</li>
       </ul>
