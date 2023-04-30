@@ -61,7 +61,7 @@ label {
 	padding: 8px;
 }
 
-button{
-	align-content: center;
-	margin-top: 5px;	
+select option[selected] {
+  background-color: #d1026d;
+  color: white;
 }

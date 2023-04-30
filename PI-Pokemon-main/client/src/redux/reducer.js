@@ -59,15 +59,15 @@ const rootReducer = (state = initialState, action)=> {
     case SORT:
       let orderedCharacters = [...state.pokemons];
       orderedCharacters = orderedCharacters.sort((a, b) => {
-        if (a.name < b.name) {
-          return action.payload === "ASCENDENTE" ? -1 : 1;
+        if (action.payload === "ASCENDENTE") {
+          return a.name.localeCompare(b.name);
+        } else if (action.payload === "DESCENDENTE") {
+          return b.name.localeCompare(a.name);
+        } else {
+          return 0;
         }
-        if (a.name > b.name) {
-          return action.payload === "ASCENDENTE" ? 1 : -1;
-        }
-        return 0; 
       });
-
+    
       return {
         ...state,
         pokemons:

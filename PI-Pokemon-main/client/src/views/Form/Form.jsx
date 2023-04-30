@@ -18,6 +18,8 @@ const  validate = (pokemon)=>{
   const history = useHistory();
   const types = useSelector((state) => state.types);
   const [errors,setErrors] = useState({});
+  const [selectedTypes, setSelectedTypes] = useState([]);
+ 
 
   const [pokemon, setPokemon] = useState({
     name: "",
@@ -52,11 +54,19 @@ const onInputChange = (e) =>{
     //console.log(pokemon)
 }
 
-const handleSelect = (e) => {
-  setPokemon({
-    ...pokemon,
-    types: [...pokemon.types, e.target.value],
-  })
+const handleSelect = (event) => {
+  const { value } = event.target;
+  const option = event.target.options[event.target.selectedIndex];
+
+  if (selectedTypes.includes(value)) {
+    setSelectedTypes(selectedTypes.filter((type) => type !== value));
+    option.removeAttribute('selected');
+    option.classList.remove('selected');
+  } else {
+    setSelectedTypes([...selectedTypes, value]);
+    option.setAttribute('selected', '');
+    option.classList.add('selected');
+  }
 };
 
 
@@ -69,7 +79,10 @@ const onSubmit = (e) =>{
     })
   )
   if(Object.keys(errors).length=== 0){
-    dispatch(postPokemon(pokemon));
+    dispatch(postPokemon({
+      ...pokemon,
+      types: selectedTypes, // usar el valor del estado selectedTypes
+    }));
     alert("Pokemon Creado 👌");
     setPokemon({//seteo todo mi input en cero
       name: "",
@@ -83,6 +96,7 @@ const onSubmit = (e) =>{
       weight: 0,
       
   });
+  setSelectedTypes([]);
 }else{
   alert('ERROR: Pokemon No Creado  😕');
   return;
@@ -180,7 +194,7 @@ const onSubmit = (e) =>{
         
         <div className="types-s">
           <label className="types">Tipos:</label>
-          <select onChange={handleSelect}>
+          <select  onChange={handleSelect} multiple >
             {types.map((e) => (
               <option key={e.name} value={e.name}>{e.name}</option>
           ))}

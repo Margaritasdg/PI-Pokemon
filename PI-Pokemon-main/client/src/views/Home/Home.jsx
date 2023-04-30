@@ -22,6 +22,8 @@ const Home= ()=> {
   const allPokemons = useSelector((state) => state.pokemons) //con useSelector hago que me traiga todo lo q esta en el estado de pokemon y lo guardo en esta constante
   const [currentPage, setCurrentPage] = useState(1);//estado local.siempre arranca de la pag. 1//guardame la pag. actual y una constante que me setee la pag.actual
   const [pokemonsPerPage] = useState(12);//otro estado local, setear los pokemons por pag. //guardar cuantos quiero por pagina
+  const [sortOption, setSortOption] = useState("");
+
   const indexOfLastPokemon = currentPage * pokemonsPerPage;//1*12
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = allPokemons.slice(//pokemon por pag. actual
@@ -49,9 +51,14 @@ const Home= ()=> {
     dispatch(filterByAttack(e.target.value));
   }
 
-  function onSelectsChange(e) {  
+  //function onSelectsChange(e) {  
+    //dispatch(Sort(e.target.value));
+  //}
+  const onSelectsChange = (e) => {
+    setSortOption(e.target.value);
     dispatch(Sort(e.target.value));
-  }
+  };
+
   
   return (
      <>
@@ -60,9 +67,9 @@ const Home= ()=> {
       <div className="home">
         <div>
           <select name="select" onChange={onSelectsChange} className="a-z">
-            <option value="Filtro"> A-Z:</option>
-            <option value="ASCENDENTE">Ascendente</option>
-            <option value="DESCENDENTE">Descendente</option>
+            <option value="Filtro"> Ordenar por</option>
+            <option value="ASCENDENTE">Nombre A-Z</option>
+            <option value="DESCENDENTE">Nombre Z-A</option>
           </select>
           <select name="selects" onChange={handleFilterAttack}
             className="attack"

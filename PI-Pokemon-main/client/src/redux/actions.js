@@ -30,10 +30,10 @@ export const filterPokemonsByType =(payload)=> {//el payload es el value del inp
   };
 }
 export const SORT = "SORT";
-export const Sort=(order)=>{//asc y desc
+export const Sort=(option)=>{//asc y desc
   return {
       type: SORT,
-      payload: order
+      payload:option
   }
 }
 export const FILTER_CREATED = "FILTER_CREATED";
